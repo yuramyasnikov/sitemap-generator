@@ -1,6 +1,6 @@
 {
     "name": "yuramyasnikov/sitemap-generator",
-    "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Yura\\SitemapGenerator\\": "src/"
