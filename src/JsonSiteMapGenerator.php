@@ -6,6 +6,7 @@ use Yura\SitemapGenerator\SiteMapGeneratorInterface;
 
 final class JsonSiteMapGenerator implements SiteMapGeneratorInterface
 {
+    use DirectoryEnsurer;
 
     #[\Override] public function generate(array $pages, string $outputPath): void
     {
@@ -18,6 +19,7 @@ final class JsonSiteMapGenerator implements SiteMapGeneratorInterface
             ];
         }, $pages);
 
+        $this->ensureDirectoryForFile($outputPath);
         file_put_contents($outputPath, json_encode($data, JSON_PRETTY_PRINT));
     }
 }

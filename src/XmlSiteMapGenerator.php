@@ -7,6 +7,7 @@ use Yura\SitemapGenerator\SiteMapGeneratorInterface;
 
 final class XmlSiteMapGenerator implements SiteMapGeneratorInterface
 {
+    use DirectoryEnsurer;
 
     #[\Override] public function generate(array $pages, string $outputPath): void
     {
@@ -19,6 +20,8 @@ final class XmlSiteMapGenerator implements SiteMapGeneratorInterface
             $url->addChild('changefreq', $page->getChangeFreq()->value);
             $url->addChild('priority', strval($page->getPriority()));
         }
+
+        $this->ensureDirectoryForFile($outputPath);
         file_put_contents($outputPath, $xml->asXML());
     }
 }

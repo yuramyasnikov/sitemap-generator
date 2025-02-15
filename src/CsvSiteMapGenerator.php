@@ -6,11 +6,14 @@ use Yura\SitemapGenerator\SiteMapGeneratorInterface;
 
 final class CsvSiteMapGenerator implements SiteMapGeneratorInterface
 {
+    use DirectoryEnsurer;
+
     /** 
      * @var array<Page> $pages
      */
     #[\Override] public function generate(array $pages, string $outputPath): void
     {
+        $this->ensureDirectoryForFile($outputPath);
         $file = fopen($outputPath, 'w');
         fputcsv($file, ['URL', 'Last Modified', 'Change Frequency', 'Priority']);
         foreach ($pages as $page) {
